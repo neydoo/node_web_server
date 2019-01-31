@@ -2,7 +2,7 @@ const express = require('express')
 const hbs = require('hbs')
 const fs = require('fs')
 
-const port = 3000 || process.env.PORT
+const port = process.env.PORT || 3000
 
 const app = express()
 
@@ -16,7 +16,7 @@ hbs.registerHelper('screamIt', (text) => {
 app.use((req, res, next) => {
     const log = `${new Date().toString()}, "${req.method}", "${req.url}" \n`
     console.log(log)
-    
+
     fs.appendFileSync('server.log', log, (err) => {
         if (err) {
             console.log(err)
@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 app.use(express.static(__dirname + '/public'))
 
 app.get('/', (req, res) => {
-    res.render('home.hbs',{
+    res.render('home.hbs', {
         user: "somebody",
         pageTitle: 'Home',
         currentYear: new Date().getFullYear()
@@ -43,7 +43,7 @@ app.get('/about', (req, res) => {
         currentYear: new Date().getFullYear()
     })
 })
-app.get('/projects',(req,res)=>{
+app.get('/projects', (req, res) => {
     res.render('projects.hbs', {
         pageTitle: 'Projects',
         currentYear: new Date().getFullYear()
