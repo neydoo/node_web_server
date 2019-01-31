@@ -24,9 +24,9 @@ app.use((req, res, next) => {
     })
     next()
 })
-app.use((req, res, next) => {
-    res.render('maint.hbs')
-})
+// app.use((req, res, next) => {
+//     res.render('maint.hbs')
+// })
 app.use(express.static(__dirname + '/public'))
 
 app.get('/', (req, res) => {
@@ -43,7 +43,12 @@ app.get('/about', (req, res) => {
         currentYear: new Date().getFullYear()
     })
 })
-
+app.get('/projects',(req,res)=>{
+    res.render('projects.hbs', {
+        pageTitle: 'Projects',
+        currentYear: new Date().getFullYear()
+    })
+})
 app.get('/bad', (req, res) => {
     res.send({
         errorMessage: 'unable to process request'
